@@ -16,7 +16,7 @@ along with this software (see the LICENSE.md file). If not, see
     <input type="hidden" id="confAppHost" value="${ec.web.getHostName(true)}">
     <input type="hidden" id="confAppRootPath" value="${ec.web.servletContext.contextPath}">
     <!-- ===== NOTE CHANGED: versus moqui-quasar file only these 2 lines changed: ===== -->
-    <input type="hidden" id="confBasePath" value="${ec.web.servletContext.contextPath}/custom">
+    <input type="hidden" id="confBasePath" value="${ec.web.servletContext.contextPath}/apps">
     <input type="hidden" id="confLinkBasePath" value="${ec.web.servletContext.contextPath}/capps">
     <input type="hidden" id="confUserId" value="${ec.user.userId!''}">
     <input type="hidden" id="confLocale" value="${ec.user.locale.toLanguageTag()}">
@@ -29,7 +29,6 @@ along with this software (see the LICENSE.md file). If not, see
     <#-- to build a layout use the handy Quasar tool: https://quasar.dev/layout-builder -->
     <q-layout view="hHh LpR fFf">
         <q-header reveal bordered class="bg-black text-white" id="top"><q-toolbar style="font-size:15px;">
-            <q-btn dense flat icon="menu" @click="toggleLeftOpen()"></q-btn>
 
             <#assign headerLogoList = sri.getThemeValues("STRT_HEADER_LOGO")>
             <#if headerLogoList?has_content>
@@ -138,10 +137,6 @@ along with this software (see the LICENSE.md file). If not, see
                    onclick="return confirm('${ec.l10n.localize("Logout")} ${(ec.user.userAccount.userFullName)!''}?')">
                 <q-tooltip>${ec.l10n.localize("Logout")} ${(ec.user.userAccount.userFullName)!''}</q-tooltip></q-btn>
         </q-toolbar></q-header>
-
-        <q-drawer v-model="leftOpen" side="left" bordered><#-- no 'overlay', for those who want to keep it open better to compress main area -->
-            <q-list dense padding><m-menu-nav-item :menu-index="0"></m-menu-nav-item></q-list>
-        </q-drawer>
 
         <q-page-container class="q-ma-sm"><q-page>
             <m-subscreens-active></m-subscreens-active>
